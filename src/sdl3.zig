@@ -189,6 +189,7 @@ pub const Window = opaque {
     pub const getFullscreenMode = getWindowFullscreenMode;
     pub const getPosition = getWindowPosition;
     pub const getSize = getWindowSize;
+    pub const getSizeInPixels = getWindowSizeInPixels;
     pub const setTitle = setWindowTitle;
 };
 
@@ -226,6 +227,11 @@ pub fn getWindowSize(window: *Window, w: ?*i32, h: ?*i32) Error!void {
     if (SDL_GetWindowSize(window, w, h) == False) return makeError();
 }
 extern fn SDL_GetWindowSize(window: *Window, w: ?*i32, h: ?*i32) i32;
+
+pub fn getWindowSizeInPixels(window: *Window, w: ?*i32, h: ?*i32) Error!void {
+    if (SDL_GetWindowSizeInPixels(window, w, h) == False) return makeError();
+}
+extern fn SDL_GetWindowSizeInPixels(window: *Window, w: ?*i32, h: ?*i32) i32;
 
 pub fn setWindowTitle(window: *Window, title: [:0]const u8) void {
     SDL_SetWindowTitle(window, title);
